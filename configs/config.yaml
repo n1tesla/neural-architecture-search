@@ -1,0 +1,60 @@
+DATA:
+    QUICK_DATA:
+      window_size : 30
+      stride_size : 2
+      features : [LPCompOT]
+      id_features: [unit_number, time_in_cycles]
+      scaler_type: 'minmax'
+      validation_ratio: 0.2
+
+
+    MID_DATA:
+      window_size: [16,24,32]
+      stride_size: [2,4]
+      features: [ LPCompOT, HPCompOT,LPTurbineOT, HPCompOP, PhyFanSpeed, PhyCoreSpeed, HPCOStaticPre, RFuelFlow,
+                  CorrectedFanSpeed, BypassRatio, BleedEnthalpy, HPTurbineCoolAirFlow,LPTurbineAirFlow ]
+      id_features: [ unit_number, time_in_cycles ]
+      scaler: [minmax]
+      validation_ratio: [0.2]
+
+
+
+QUICK:
+  REGRESSION:
+    LSTM_NAS:
+      module_name: "lstm"
+      network_name : "LSTM_RegNetwork"
+      NUM_LAYERS: 3
+      MAX_TRIALS: 10
+      MAX_EPOCHS: 10
+      BATCH_SIZE:  512
+      CHILD_BATCHSIZE: 128
+      EXPLORATION: 0.8
+      REGULARIZATION: 0.001
+      CONTROLLER_CELLS: 32
+      EMBEDDING_DIM: 20
+      ACCURACY_BETA: 0.8
+      CLIP_REWARDS: 0.0
+      RESTORE_CONTROLLER: True
+
+
+    FCN:
+      module_name: "fcn"
+      network_name : "FCN_RegNetwork"
+      batch_size:  512
+      epochs: 10
+      max_trials: 4
+    FCLCNN_LSTM:
+      module_name: "fclcnn_lstm"
+      network_name : "FCLCNNLSTM_RegNetwork"
+      batch_size:  512
+      epochs: 10
+      max_trials: 4
+
+
+
+
+
+
+
+
