@@ -15,7 +15,7 @@ class StateSpace:
     State Space manager
 
     Provides utilit functions for holding "states" / "actions" that the controller
-    must use to train and predict.
+    must use to train_nas and predict.
 
     Also provides a more convenient way to define the search space
     '''
@@ -448,7 +448,7 @@ class Controller:
 
     def train_step(self):
         '''
-        Perform a single train step on the Controller RNN
+        Perform a single train_nas step on the Controller RNN
 
         Returns:
             the training loss
@@ -494,7 +494,7 @@ class Controller:
             self.summary_writer.add_summary(summary, global_step)
             self.saver.save(self.policy_session, save_path='weights/controller.ckpt', global_step=self.global_step)
 
-            # reduce exploration after many train steps
+            # reduce exploration after many train_nas steps
             if global_step != 0 and global_step % 20 == 0 and self.exploration > 0.5:
                 self.exploration *= 0.99
 

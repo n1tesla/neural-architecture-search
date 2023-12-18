@@ -2,12 +2,12 @@ import tensorflow as tf
 from keras import backend as K
 from tensorflow.python.keras import backend as K
 import csv
-from controller import Controller, StateSpace
-from manager import NetworkManager
+from train_nas.controller import Controller, StateSpace
+from train_nas.manager import NetworkManager
 from models.lstm_nas import model_fn
 
 
-def train(config,X_train,y_train,X_test,y_test):
+def train_nas_(config, X_train, y_train, X_test, y_test):
 
     # create a shared session between Keras and Tensorflow
     policy_sess = tf.compat.v1.Session()
@@ -44,7 +44,7 @@ def train(config,X_train,y_train,X_test,y_test):
     # clear the previous files
     controller.remove_files()
 
-    # train for number of trails
+    # train_nas for number of trails
     for trial in range(config.MAX_TRIALS):
         with policy_sess.as_default():
             K.set_session(policy_sess)
@@ -54,7 +54,7 @@ def train(config,X_train,y_train,X_test,y_test):
         state_space.print_actions(actions)
         print("Predicted actions : ", state_space.parse_state_space_list(actions))
 
-        # build a models, train and get reward and accuracy from the network manager
+        # build a models, train_nas and get reward and accuracy from the network manager
         reward, previous_acc = manager.get_rewards(model_fn, state_space.parse_state_space_list(actions))
         print("Rewards : ", reward, "Accuracy : ", previous_acc)
 
@@ -68,7 +68,7 @@ def train(config,X_train,y_train,X_test,y_test):
             state = actions
             controller.store_rollout(state, reward)
 
-            # train the controller on the saved state and the discounted rewards
+            # train_nas the controller on the saved state and the discounted rewards
             loss = controller.train_step()
             print("Trial %d: Controller loss : %0.6f" % (trial + 1, loss))
 

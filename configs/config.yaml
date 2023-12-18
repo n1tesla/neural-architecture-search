@@ -20,10 +20,10 @@ DATA:
 
 
 QUICK:
-  REGRESSION:
+  ANOMALY:
     LSTM_NAS:
       module_name: "lstm"
-      network_name : "LSTM_RegNetwork"
+      network_name : "LSTM_AnomalyNetwork"
       NUM_LAYERS: 3
       MAX_TRIALS: 10
       MAX_EPOCHS: 10

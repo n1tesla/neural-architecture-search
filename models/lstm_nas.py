@@ -12,7 +12,6 @@ def model_fn(actions):
     output_layer=Dense(1)(x)
     model=Model(inputs=input_layer,outputs=output_layer)
 
-
     return model
 
 

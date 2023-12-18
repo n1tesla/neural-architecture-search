@@ -18,7 +18,7 @@ class NetworkManager:
 
         Args:
             dataset: a tuple of 4 arrays (X_train, y_train, X_val, y_val)
-            epochs: number of epochs to train the subnetworks
+            epochs: number of epochs to train_nas the subnetworks
             child_batchsize: batchsize of training the subnetworks
             acc_beta: exponential weight for the accuracy
             clip_rewards: float - to clip rewards in [-range, range] to prevent
@@ -71,7 +71,7 @@ class NetworkManager:
             # unpack the dataset
             X_train, y_train, X_val, y_val = self.dataset
 
-            # train the models using Keras methods
+            # train_nas the models using Keras methods
             model.fit(X_train, y_train, batch_size=self.batchsize, epochs=self.epochs,
                       verbose=1, validation_data=(X_val, y_val),
                       callbacks=[ModelCheckpoint('../weights/temp_network.h5',
